@@ -320,8 +320,14 @@ nav h1 a {
 #reviews-list li p {
   margin: 0 0 10px;
 }
+#restaurant-hours {
+  text-align: left;
+  padding-left: 10px;
+}
+
 #restaurant-hours td {
   color: #666;
+  padding-left: 20px;
 }
 
 @media only screen and (max-width: 768px) {
