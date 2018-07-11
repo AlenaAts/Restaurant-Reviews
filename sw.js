@@ -22,7 +22,7 @@ const urlsToCache = [
 	"/img/10.jpg"
 ];
 
-
+// install service worker
 self.addEventListener('install', (event) => {
 	event.waitUntil(
 		caches.open(cacheName).then((cache) => {
@@ -32,8 +32,7 @@ self.addEventListener('install', (event) => {
 		);
 });
 
-
-//version 3
+// return request
 self.addEventListener('fetch', (event) => {
 	console.log("Fetched");
 	event.respondWith(
@@ -43,49 +42,3 @@ self.addEventListener('fetch', (event) => {
 		})
 	);
 });
-
-//version 2
-/*self.addEventListener('fetch', (event) => {
-	console.log("Succeed to fetch")
-	event.respondWith(fromCache(event.request))
-	}
-);
-
-function fromCache(request) {
-	return caches.open(cacheName).then((cache) =>
-		cache.match(request)
-			.then((matching) => matching || Promise.reject('no-match'))
-		);
-}*/
-
-
-//version 1
-/*self.addEventListener('fetch', (event) => {
-	event.respondWith(
-		caches.match(event.request)
-			.then((response) => {
-				if (response) {
-					return response;
-				}
-
-				let fetchRequest = event.request.clone();
-
-				return fetch(fetchRequest).then(
-					(response) => {
-						if (!response || response.status !== 200 || response.type !== 'basic') {
-							return response;
-						}
-
-						let responseToCache = response.clone();
-
-						caches.open(cacheName)
-							.then((cache) => {
-								cache.put(event.request, responseToCache);
-							});
-
-						return response;
-					}
-				);
-			})
-		);
-});*/
